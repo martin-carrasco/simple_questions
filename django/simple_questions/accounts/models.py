@@ -1,6 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin, UserManager
-from django.contrib.auth import validators
+from django.contrib.auth.models import PermissionsMixin
+from django.core import validators
 from django.db import models
 
 def user_directory_path(instance, filename):
@@ -38,8 +38,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(primary_key=True,
-                                db_index=True, max_length=30,
+    username = models.CharField(db_index=True, max_length=30,
                                 unique=True, blank=False,
                                 help_text='Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.',
                                 validators=[
@@ -60,6 +59,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
     EMAIL_FIEL = 'email'
-    REQUIRED_FIELDS = ['email', 'username', 'display_name']
+    REQUIRED_FIELDS = ['email', 'display_name']
     
     objects = CustomUserManager()
+
+    def __str__(self):
+        return f"{self.username}"
