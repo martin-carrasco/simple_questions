@@ -1,3 +1,4 @@
+from django.core.exceptions import FieldError
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 from simple_questions import settings
@@ -47,6 +48,11 @@ class Post(BaseComment):
     thread = ForeignKey(Thread, on_delete=models.CASCADE)
     accepted = models.BooleanField(default=False)
     main = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.thread.creator != self.creator and self.main:
+            raise FieldError("Main post needs to be by thread creator")
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-updated_at']
