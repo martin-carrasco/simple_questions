@@ -14,8 +14,11 @@ class BaseComment(models.Model):
     content = models.CharField(max_length=1024)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_dd=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     score = models.IntegerField(default=0)
+
+    class Meta:
+        abstract = True
 
     def __str__(self):
         return '{}'.format(self.content)
@@ -30,7 +33,7 @@ class Thread(models.Model):
     """
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_dd=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
     title = models.CharField(max_length=128)
 
