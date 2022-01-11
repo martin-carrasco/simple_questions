@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from rest_framework import permissions, generics, serializers, viewsets
-from rest_framework.response import Response
+from rest_framework import permissions, viewsets
 from .models import Thread, Post, Reply
 from .serializers import ThreadSerializer, PostSerializer, ReplySerializer
 
@@ -18,7 +17,7 @@ class UserPermission(permissions.BasePermission):
             return obj.creator == request.user
         return True
 
-class TheadsViewSet(viewsets.ModelViewSet):
+class ThreadViewSet(viewsets.ModelViewSet):
     queryset = Thread.objects.all()
     serializer_class = ThreadSerializer
     permission_classes = [UserPermission]

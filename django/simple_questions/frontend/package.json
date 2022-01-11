@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@craco/craco": "^6.4.3",
+    "@reduxjs/toolkit": "^1.7.1",
+    "autoprefixer": "^9",
+    "axios-auth-refresh": "^3.2.1",
+    "postcss": "^7",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  }
+}

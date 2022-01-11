@@ -55,7 +55,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                     help_text='Designates whether the user can log into this admin site')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    display_name = models.CharField(max_length=30, blank=False)
+    display_name = models.CharField(unique=True, max_length=30, blank=False)
 
     USERNAME_FIELD = 'username'
     EMAIL_FIEL = 'email'
